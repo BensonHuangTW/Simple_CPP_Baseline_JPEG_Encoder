@@ -390,7 +390,7 @@ namespace cppeg
         compInfo = ntohs(compInfo);
         m_imageFile.write(reinterpret_cast<const char *>(&compInfo), 2);
 
-        // write three bytes (will be skipped when decoding)
+        // Ss, Se, Ah and Al (ITU-T81, page 37)
         m_imageFile << (UInt8)0x00 << (UInt8)0x3f << (UInt8)0x00;
     }
 

@@ -1,5 +1,5 @@
 # Simple Baseline JPEG Encoder
-This goal of this repository is to provide simple codes of high readibility for fully understanding the encoding process of baseline JPEG. The implememtation was inspired by [TheIllusionistMirage](https://github.com/TheIllusionistMirage)'s [JPEG decoder](https://github.com/TheIllusionistMirage/simple-jpeg-decoder) repository. Image processing related operations use (OpenCV)[https://github.com/opencv/opencv] library for higher readibilty. You can refer to it's [official documentation](https://docs.opencv.org) for more details.
+This goal of this repository is to provide simple codes of high readibility for fully understanding the encoding process of baseline JPEG. The implememtation was inspired by [TheIllusionistMirage](https://github.com/TheIllusionistMirage)'s [JPEG decoder](https://github.com/TheIllusionistMirage/simple-jpeg-decoder) repository. Image processing related operations use [OpenCV](https://github.com/opencv/opencv) library for higher readibilty. You can refer to it's [official documentation](https://docs.opencv.org) for more details.
 
 # Building
 Go to the repostiry directory and execute the following commands in shell:
@@ -8,6 +8,10 @@ $ mkdir build && cd build
 $ cmake ..
 $ make
 ```
+
+# Dependency
+You need to install [OpenCV](https://opencv.org) to build the executable.
+
 # Usage
 ### print help
 ```
