@@ -1,0 +1,8 @@
+# VSCode settings
+.vscode/
+
+# build artifacts
+build/
+
+# for MAC OS
+.DS_Store
