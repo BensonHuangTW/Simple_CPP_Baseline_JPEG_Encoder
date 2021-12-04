@@ -111,41 +111,43 @@ namespace cppeg
 
     std::vector<std::pair<int, int>> RLC::zzorderDataToRLC(std::vector<int> zzorderData)
     {
-        int zeroCount = 0, posEOB = zzorderData.size();
         std::vector<std::pair<int, int>> outputRLC;
 
-        // first find the position of EOB
-        for (int i = posEOB - 1; i >= 0; --i)
-        {
-            if (zzorderData[i] == 0)
-                posEOB = i;
-            else
-                break;
-        }
+        // DC component
+        outputRLC.push_back(std::make_pair(0, zzorderData[0]));
 
-        // generate run-length code
-        outputRLC.push_back(std::make_pair(0, zzorderData[0])); // DC component
-        for (auto i = 1; i < posEOB; ++i)
+        // AC components (ITU-T81, page 92)
+        int k = 0, zeroCount = 0;
+        while (k != 63)
         {
-            if (zzorderData[i] == 0)
+            k++;
+            if (zzorderData[k] == 0)
             {
-                zeroCount++;
-                if (zeroCount == 15)
+                if (k == 63)
                 {
-                    // length of zero coefficients exceed 15
-                    outputRLC.push_back(std::make_pair(15, 0));
-                    zeroCount = 0;
+                    outputRLC.push_back(std::make_pair(0, 0));
+                    break;
+                }
+                else
+                {
+                    zeroCount++;
+                    continue;
                 }
             }
             else
             {
-                outputRLC.push_back(std::make_pair(zeroCount, zzorderData[i]));
-                zeroCount = 0;
+                if (zeroCount > 15)
+                {
+                    outputRLC.push_back(std::make_pair(15, 0));
+                    zeroCount -= 16;
+                }
+                else
+                {
+                    outputRLC.push_back(std::make_pair(zeroCount, zzorderData[k]));
+                    zeroCount = 0;
+                }
             }
         }
-
-        // append EOB
-        outputRLC.push_back(std::make_pair(0, 0));
 
         return outputRLC;
     }
