@@ -45,9 +45,9 @@ namespace cppeg
         /// @param curDCValues this vecoter will hold each channel's DC values of currently passed
         /// MCU based on the following rule: MCU(0, 0) = curDCValue - prevDCValue
         /// @param prevDCValues the DC values of previous encoded MCU
-        RunLengthCode MCUtoRLC(const cv::Mat &MCU,
-                               std::vector<int> &curDCValues,
-                               const std::vector<int> &prevDCValues = std::vector<int>());
+        RLCContainer MCUtoRLC(const cv::Mat &MCU,
+                              std::vector<int> &curDCValues,
+                              const std::vector<int> &prevDCValues = std::vector<int>());
 
     private:
         /// horizontal sample factors for Y, Cb, Cr
@@ -77,7 +77,7 @@ namespace cppeg
         ///
         /// @param zzorderData MCU elements array in zig-zag order
         /// @return the corresponding run-length code of zzorderData
-        std::vector<std::pair<int, int>> zzorderDataToRLC(std::vector<int> zzorderData);
+        ChannelRLC zzorderDataToRLC(std::vector<int> zzorderData);
     };
 }
 

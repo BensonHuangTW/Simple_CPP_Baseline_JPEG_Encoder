@@ -69,7 +69,7 @@ namespace cppeg
         return std::log2(std::abs(value)) + 1;
     }
 
-    std::string singleRLCToBitString(const std::vector<std::pair<int, int>> &runLengthCode,
+    std::string singleRLCToBitString(const ChannelRLC &runLengthCode,
                                      const HuffmanCodeMapper &DCMapper,
                                      const HuffmanCodeMapper &ACMapper)
     {

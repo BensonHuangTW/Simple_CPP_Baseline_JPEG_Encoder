@@ -41,12 +41,12 @@ namespace cppeg
         hSampleFactors[2] = sampFactorCr;
     }
 
-    RunLengthCode RLC::MCUtoRLC(const cv::Mat &MCU,
-                                std::vector<int> &curDCValues,
-                                const std::vector<int> &prevDCValues)
+    RLCContainer RLC::MCUtoRLC(const cv::Mat &MCU,
+                               std::vector<int> &curDCValues,
+                               const std::vector<int> &prevDCValues)
     {
         // output run-length codes
-        std::vector<std::vector<std::pair<int, int>>> outputRLC;
+        RLCContainer outputRLC;
 
         // convert color space: RGB to YCbCr
         cv::Mat fpMCU(8, 8, CV_32FC3);
@@ -109,9 +109,9 @@ namespace cppeg
         return runLenCode;
     }
 
-    std::vector<std::pair<int, int>> RLC::zzorderDataToRLC(std::vector<int> zzorderData)
+    ChannelRLC RLC::zzorderDataToRLC(std::vector<int> zzorderData)
     {
-        std::vector<std::pair<int, int>> outputRLC;
+        ChannelRLC outputRLC;
 
         // DC component
         outputRLC.push_back(std::make_pair(0, zzorderData[0]));

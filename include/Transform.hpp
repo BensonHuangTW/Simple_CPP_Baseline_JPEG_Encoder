@@ -15,7 +15,7 @@ namespace cppeg
     /// @param zzIndex the index in the zig-zag order
     /// @return the matrix indices corresponding to the zig-zag order
     const std::pair<const int, const int> zzOrderToMatIndices(const int zzindex);
-    
+
     /// Convert matrix indices to its corresponding zig-zag order index
     ///
     /// @param the matrix indices
@@ -27,7 +27,7 @@ namespace cppeg
     /// @param value value of the number
     /// @return the bit string corresponding to the value
     std::string valuetoBitString(const Int16 value);
-    
+
     /// Get the category of a value
     ///
     /// @param value the whose category has to be determined
@@ -41,10 +41,10 @@ namespace cppeg
     /// @param DCMapper huffman code mapper of DC coefficient
     /// @param ACMapper huffman code mapper of AC coefficient
     /// @return the bit string corresponding to the run-length code
-    std::string singleRLCToBitString(const std::vector<std::pair<int, int>> &runLengthCode,
-                                    const HuffmanCodeMapper &DCMapper,
-                                    const HuffmanCodeMapper &ACMapper);
-    
+    std::string singleRLCToBitString(const ChannelRLC &runLengthCode,
+                                     const HuffmanCodeMapper &DCMapper,
+                                     const HuffmanCodeMapper &ACMapper);
+
 }
 
 #endif // TRANSFORM_HPP

@@ -65,7 +65,7 @@ namespace cppeg
         ///
         /// @param RLC array of run-length code for each channel
         /// @return the bit string corresponding to the run-length code
-        std::string RLCToBitString(const RunLengthCode &RLC);
+        std::string RLCToBitString(const RLCContainer &RLC);
 
         /// write the segment marker ,write segment data, and then calculate payload
         /// of segment and write it into the file
@@ -144,19 +144,19 @@ namespace cppeg
 
     // suggested huffman tables for DC and AC terms (ITU-T.81, page 149)
 
-    static const UInt16 bitsDCLuminanceCat[17] = {
+    static const UInt16 defaultBitsDCLuminanceCat[17] = {
         /* 0-base */ 0, 0, 1, 5, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0};
-    static const UInt16 valDCLuminanceCat[] = {
+    static const UInt16 defaultValDCLuminanceCat[] = {
         0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11};
 
-    static const UInt16 bitsDCChrominanceCat[17] = {
+    static const UInt16 defaultBitsDCChrominanceCat[17] = {
         /* 0-base */ 0, 0, 3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0};
-    static const UInt16 valDCChrominanceCat[] = {
+    static const UInt16 defaultValDCChrominanceCat[] = {
         0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11};
 
-    static const UInt16 bitsACLuminance[17] = {
+    static const UInt16 defaultBitsACLuminance[17] = {
         /* 0-base */ 0, 0, 2, 1, 3, 3, 2, 4, 3, 5, 5, 4, 4, 0, 0, 1, 0x7d};
-    static const UInt16 valACLuminance[] = {
+    static const UInt16 defaultValACLuminance[] = {
         0x01, 0x02, 0x03, 0x00, 0x04, 0x11, 0x05, 0x12,
         0x21, 0x31, 0x41, 0x06, 0x13, 0x51, 0x61, 0x07,
         0x22, 0x71, 0x14, 0x32, 0x81, 0x91, 0xa1, 0x08,
@@ -179,9 +179,9 @@ namespace cppeg
         0xf1, 0xf2, 0xf3, 0xf4, 0xf5, 0xf6, 0xf7, 0xf8,
         0xf9, 0xfa};
 
-    static const UInt16 bitsACChrominance[17] = {
+    static const UInt16 defaultBitsACChrominance[17] = {
         /* 0-base */ 0, 0, 2, 1, 2, 4, 4, 3, 4, 7, 5, 4, 4, 0, 1, 2, 0x77};
-    static const UInt16 valACChrominance[] = {
+    static const UInt16 defaultValACChrominance[] = {
         0x00, 0x01, 0x02, 0x03, 0x11, 0x04, 0x05, 0x21,
         0x31, 0x06, 0x12, 0x41, 0x51, 0x07, 0x61, 0x71,
         0x13, 0x22, 0x32, 0x81, 0x08, 0x14, 0x42, 0x91,

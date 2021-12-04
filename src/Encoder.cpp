@@ -124,23 +124,27 @@ namespace cppeg
     {
         logFile << "Constructing default Huffman codes mapper from the deafult table" << std::endl;
 
-        m_huffmanCodeMapper[HT_DC][HT_Y] = huffmanTableArraysToHuffmanMapper(bitsDCLuminanceCat, valDCLuminanceCat);
-        m_huffmanCodeMapper[HT_AC][HT_Y] = huffmanTableArraysToHuffmanMapper(bitsACLuminance, valACLuminance);
-        m_huffmanCodeMapper[HT_DC][HT_CbCr] = huffmanTableArraysToHuffmanMapper(bitsDCChrominanceCat, valDCChrominanceCat);
-        m_huffmanCodeMapper[HT_AC][HT_CbCr] = huffmanTableArraysToHuffmanMapper(bitsACChrominance, valACChrominance);
+        logFile << "Luminance DC Huffman table:" << std::endl;
+        m_huffmanCodeMapper[HT_DC][HT_Y] = huffmanTableArraysToHuffmanMapper(defaultBitsDCLuminanceCat, defaultValDCLuminanceCat);
+        logFile << "Luminance AC Huffman table:" << std::endl;
+        m_huffmanCodeMapper[HT_AC][HT_Y] = huffmanTableArraysToHuffmanMapper(defaultBitsACLuminance, defaultValACLuminance);
+        logFile << "Chrominance DC Huffman table:" << std::endl;
+        m_huffmanCodeMapper[HT_DC][HT_CbCr] = huffmanTableArraysToHuffmanMapper(defaultBitsDCChrominanceCat, defaultValDCChrominanceCat);
+        logFile << "Chrominance AC Huffman table:" << std::endl;
+        m_huffmanCodeMapper[HT_AC][HT_CbCr] = huffmanTableArraysToHuffmanMapper(defaultBitsACChrominance, defaultValACChrominance);
     }
 
     void Encoder::constructDefaultHuffmanTables()
     {
         logFile << "Constructing default Huffman tables from the default table" << std::endl;
 
-        m_huffmanTable[HT_DC][HT_Y] = huffmanTableArraysToHuffmanTable(bitsDCLuminanceCat, valDCLuminanceCat);
-        m_huffmanTable[HT_AC][HT_Y] = huffmanTableArraysToHuffmanTable(bitsACLuminance, valACLuminance);
-        m_huffmanTable[HT_DC][HT_CbCr] = huffmanTableArraysToHuffmanTable(bitsDCChrominanceCat, valDCChrominanceCat);
-        m_huffmanTable[HT_AC][HT_CbCr] = huffmanTableArraysToHuffmanTable(bitsACChrominance, valACChrominance);
+        m_huffmanTable[HT_DC][HT_Y] = huffmanTableArraysToHuffmanTable(defaultBitsDCLuminanceCat, defaultValDCLuminanceCat);
+        m_huffmanTable[HT_AC][HT_Y] = huffmanTableArraysToHuffmanTable(defaultBitsACLuminance, defaultValACLuminance);
+        m_huffmanTable[HT_DC][HT_CbCr] = huffmanTableArraysToHuffmanTable(defaultBitsDCChrominanceCat, defaultValDCChrominanceCat);
+        m_huffmanTable[HT_AC][HT_CbCr] = huffmanTableArraysToHuffmanTable(defaultBitsACChrominance, defaultValACChrominance);
     }
 
-    std::string Encoder::RLCToBitString(const RunLengthCode &RLC)
+    std::string Encoder::RLCToBitString(const RLCContainer &RLC)
     {
 #ifndef NDEBUG
         assert(RLC.size() == 3);
@@ -413,7 +417,7 @@ namespace cppeg
             {
                 cv::Mat MCUblock = padImg(cv::Rect(i * MCUsize, j * MCUsize, MCUsize, MCUsize));
                 RLC rlc;
-                RunLengthCode runLengthCode = rlc.MCUtoRLC(MCUblock, curDCValues, prevDCValues);
+                RLCContainer runLengthCode = rlc.MCUtoRLC(MCUblock, curDCValues, prevDCValues);
                 scanData += RLCToBitString(runLengthCode);
                 for (int k = 0; k < 3; ++k)
                 {
